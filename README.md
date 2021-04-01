@@ -65,20 +65,29 @@ I will use [SemVer](http://semver.org/) for versioning.
 ## License
 
 As far as elements I have created go, they are licensed under the MIT license - see the [LICENSE](license.md).
+
 Assets credited in the **Credit** section are not mine to license. They were got freely from the Unity Asset store and used for free in a personal project.
 
 ## Credit
 
 ### Audio
 
-[Click sound]() - []()
-[Enemy magic attack sound]() - []()
+[Click sound](https://assetstore.unity.com/packages/templates/tutorials/create-with-code-complete-course-library-146048) - [Unity Education](https://assetstore.unity.com/packages/templates/tutorials/create-with-code-complete-course-library-146048).
+
+[Enemy magic explosion sound](https://assetstore.unity.com/packages/2d/free-2d-mega-pack-177430) - [Brackeys](https://assetstore.unity.com/publishers/3947).
+
+[Enemy magic attack sound](https://assetstore.unity.com/packages/audio/sound-fx/dark-magic-90658) - [MGW Sound Design](https://assetstore.unity.com/publishers/27115).
+
+[Potion pickup sound](https://freesound.org/people/Killersmurf96/sounds/423127/) - [KillerSmurf96](https://freesound.org/people/Killersmurf96/).
 
 ### Models
 
 [Character models](https://assetstore.unity.com/packages/3d/characters/humanoids/battle-royale-duo-polyart-pbr-185080), [Chest monster](https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-partners-pbr-polyart-168251), [Slime monster](https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-duo-pbr-polyart-157762), [Orc grunt monster](https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/mini-legion-grunt-pbr-hp-polyart-98187), [Lich monster](https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/mini-legion-lich-pbr-hp-polyart-91497) - [Dungeon Mason](https://assetstore.unity.com/publishers/23554).
+
 [Blue potion](https://assetstore.unity.com/packages/3d/props/weapons/low-poly-weapons-71680) - [Sics Games](https://assetstore.unity.com/publishers/18116).
+
 [Rocks](https://assetstore.unity.com/packages/3d/environments/low-poly-rock-pack-57874) - [Broken Vector](https://assetstore.unity.com/publishers/12124).
+
 [Lightning Shield Indicator](https://assetstore.unity.com/packages/templates/tutorials/create-with-code-complete-course-library-146048) - [Unity Education](https://assetstore.unity.com/packages/templates/tutorials/create-with-code-complete-course-library-146048).
 
 ### Shaders
