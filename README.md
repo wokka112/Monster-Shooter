@@ -47,23 +47,25 @@ Move mouse - Aim.
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Unity](https://unity.com/)
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Contributions are welcome though neither necessary nor expected. This was a first personal project to learn Unity. You are welcome to take it and use, change or
+update it as you wish. Just give credit to those authors credited in the **Credit** section below.
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+I will use [SemVer](http://semver.org/) for versioning.
 
 ## Authors
 
 * **Adam Poole** - *Scripts, most audio, music, gameplay* - [wokka112](https://github.com/wokka112)
 
 ## License
+
+As far as elements I have created go, they are licensed under the MIT license - see the [LICENSE](license.md).
+Assets credited in the **Credit** section are not mine to license. They were got freely from the Unity Asset store and used for free in a personal project.
 
 ## Credit
 
@@ -86,3 +88,4 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ## Inspiration/Help Acknowledgments
 
 * [Brackeys](https://www.youtube.com/user/Brackeys) videos helped me a lot.
+* The [Create with Code](https://learn.unity.com/course/create-with-code) course by the Unity team helped me get used to Unity and build this project.
