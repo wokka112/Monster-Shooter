@@ -1,9 +1,8 @@
-# Slayer Mage (working title)
+# Monster Shooter
 
-Slayer Mage (working title, soon to be changed), is a simple top-down shooter game. The player controls a human with a gun in a simple environment being attacked
-by waves of monsters that steadily increase in size and variety. The player can shoot said monsters to kill them and gains points for each killed monster. If the
-player is hit by any monster, they die and the game ends. The game has 3 difficulty settings and its goal is simply to survive as long as possible against the
-increasingly difficult waves of monsters.
+Monster Shooter is a simple top-down shooter game. The player controls a human with a gun in a simple environment being attacked by waves of monsters that steadily 
+increase in size and variety. The player can shoot said monsters to kill them and gains points for each killed monster. If the player is hit by any monster, they die 
+and the game ends. The game has 3 difficulty settings and its goal is to survive as long as possible against increasingly difficult waves of monsters.
 
 ## Getting Started
 
