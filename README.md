@@ -87,8 +87,7 @@ Assets credited in the **Credit** section are not mine to license. They were got
 
 [Lightning Shield Indicator](https://assetstore.unity.com/packages/templates/tutorials/create-with-code-complete-course-library-146048) - [Unity Education](https://assetstore.unity.com/packages/templates/tutorials/create-with-code-complete-course-library-146048).
 
-[Crosshair](https://www.flaticon.com/free-icon/fighting-weapon-target_20180?related_id=20180&origin=pack) - [FreePic](https://www.flaticon.com/authors/freepik)
-
+[Crosshair](https://www.flaticon.com/free-icon/fighting-weapon-target_20180?related_id=20180&origin=pack) - [FreePik](https://www.freepik.com/) from www.flaticon.com.
 ### Shaders
 
 [Lighting Shield Indicator Shader](https://assetstore.unity.com/packages/vfx/shaders/polygonmaker-shaders-37009) - [Polygonmaker](https://assetstore.unity.com/packages/vfx/shaders/polygonmaker-shaders-37009).
