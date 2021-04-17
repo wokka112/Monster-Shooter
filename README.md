@@ -53,10 +53,6 @@ Move mouse - Aim.
 Contributions are welcome though neither necessary nor expected. This was a first personal project to learn Unity. You are welcome to take it and use, change or
 update it as you wish. Just give credit to those authors credited in the **Credit** section below.
 
-## Versioning
-
-I will use [SemVer](http://semver.org/) for versioning.
-
 ## Authors
 
 * **Adam Poole** - *Scripts, most audio, music, gameplay* - [wokka112](https://github.com/wokka112)
@@ -79,6 +75,8 @@ Assets credited in the **Credit** section are not mine to license. They were got
 
 [Potion pickup sound](https://freesound.org/people/Killersmurf96/sounds/423127/) - [KillerSmurf96](https://freesound.org/people/Killersmurf96/).
 
+[Music](https://soundimage.org/) - [Eric Matyas](https://soundimage.org/).
+
 ### Models
 
 [Character models](https://assetstore.unity.com/packages/3d/characters/humanoids/battle-royale-duo-polyart-pbr-185080), [Chest monster](https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-partners-pbr-polyart-168251), [Slime monster](https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-duo-pbr-polyart-157762), [Orc grunt monster](https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/mini-legion-grunt-pbr-hp-polyart-98187), [Lich monster](https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/mini-legion-lich-pbr-hp-polyart-91497) - [Dungeon Mason](https://assetstore.unity.com/publishers/23554).
@@ -88,6 +86,8 @@ Assets credited in the **Credit** section are not mine to license. They were got
 [Rocks](https://assetstore.unity.com/packages/3d/environments/low-poly-rock-pack-57874) - [Broken Vector](https://assetstore.unity.com/publishers/12124).
 
 [Lightning Shield Indicator](https://assetstore.unity.com/packages/templates/tutorials/create-with-code-complete-course-library-146048) - [Unity Education](https://assetstore.unity.com/packages/templates/tutorials/create-with-code-complete-course-library-146048).
+
+[Crosshair](https://www.flaticon.com/free-icon/fighting-weapon-target_20180?related_id=20180&origin=pack) - [FreePic](https://www.flaticon.com/authors/freepik)
 
 ### Shaders
 
