@@ -1,20 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MeleeAI : MonoBehaviour
 {
     public float attackRate = 2.0f;
 
     private EnemyController enemyControllerScript;
-    private Transform playerTransform;
     private float timeSinceLastAttack = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         enemyControllerScript = GetComponent<EnemyController>();
-        playerTransform = GameObject.Find("Player").GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -30,9 +26,10 @@ public class MeleeAI : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        enemyControllerScript.SetTouchingPlayer(true);
+
         if (collision.gameObject.CompareTag("Player"))
         {
-            enemyControllerScript.StopMovement();
             enemyControllerScript.MeleeAttack();
             timeSinceLastAttack = 0;
         }
@@ -40,14 +37,6 @@ public class MeleeAI : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        float movementDelay = timeSinceLastAttack + attackRate;
-
-        if (movementDelay < 0)
-        {
-            movementDelay = 0;
-        }
-
-        // Start moving once it's been attackRate seconds since the last attack
-        Invoke("StartMovement", movementDelay);
+        enemyControllerScript.SetTouchingPlayer(false);
     }
 }

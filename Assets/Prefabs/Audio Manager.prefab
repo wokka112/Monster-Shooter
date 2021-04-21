@@ -46,13 +46,64 @@ MonoBehaviour:
   sounds:
   - name: PlayerDeath
     clip: {fileID: 8300000, guid: a86e9858cb621ad41905e1d8f12c981d, type: 3}
-    volume: 0.4
+    group: {fileID: 24300002, guid: d927d2c0e6e7845439561ff9d0545d16, type: 2}
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: MenuClick
     clip: {fileID: 8300000, guid: d04cbba9bbc6348ee871b50836a12812, type: 3}
-    volume: 0.92
+    group: {fileID: 24300002, guid: d927d2c0e6e7845439561ff9d0545d16, type: 2}
+    volume: 0.7
     pitch: 1
     loop: 0
+    source: {fileID: 0}
+  - name: LightningShieldPickup
+    clip: {fileID: 8300000, guid: f54106220e0f22a4780981ec62f85e39, type: 3}
+    group: {fileID: 24300002, guid: d927d2c0e6e7845439561ff9d0545d16, type: 2}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LightningShieldActive
+    clip: {fileID: 8300000, guid: cfd683c11013f53419e814ee9dda379a, type: 3}
+    group: {fileID: 24300002, guid: d927d2c0e6e7845439561ff9d0545d16, type: 2}
+    volume: 0.05
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: LightningShieldHit
+    clip: {fileID: 8300000, guid: 9dc2bae6678ed794792f4f162e9f7f9a, type: 3}
+    group: {fileID: 24300002, guid: d927d2c0e6e7845439561ff9d0545d16, type: 2}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BulletHit
+    clip: {fileID: 8300000, guid: ae28201bbe2be964f860e4c0dd714ba2, type: 3}
+    group: {fileID: 24300002, guid: d927d2c0e6e7845439561ff9d0545d16, type: 2}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: EnemyProjectileHit
+    clip: {fileID: 8300000, guid: d1698dd553af8ef4d887bc83b9687173, type: 3}
+    group: {fileID: 24300002, guid: d927d2c0e6e7845439561ff9d0545d16, type: 2}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MainMenuMusic
+    clip: {fileID: 8300000, guid: f2101c71d8f5b1c4cb3fec7bce8d75ba, type: 3}
+    group: {fileID: 24300002, guid: 23530ada0e3845746b091d57b20a5c6c, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: GameMusic
+    clip: {fileID: 8300000, guid: aa6caa14bc8f4104cb82e79001f72245, type: 3}
+    group: {fileID: 24300002, guid: 23530ada0e3845746b091d57b20a5c6c, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 1
     source: {fileID: 0}

@@ -1,20 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RotateRight : MonoBehaviour
 {
-    private float speed = 60.0f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private const float speed = 60.0f;
 
     // Update is called once per frame
     void Update()
     {
+        // Rotate object right by speed
         transform.Rotate(Vector3.up * speed * Time.deltaTime);
     }
 }

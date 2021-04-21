@@ -1,11 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    GameObject optionsMenu;
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindObjectOfType<AudioManager>();
+    }
+
+    private void Start()
+    {
+        audioManager.Play("MainMenuMusic");    
+    }
 
     public void PlayGame()
     {
@@ -15,6 +23,8 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-        UnityEditor.EditorApplication.isPlaying = false;
+
+        // Stop the play mode in Unity Editor if playing in that
+        //UnityEditor.EditorApplication.isPlaying = false;
     }
 }

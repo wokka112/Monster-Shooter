@@ -12,34 +12,32 @@ public class PlayerAnim : MonoBehaviour
         playerAnimator = GetComponentInChildren<Animator>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    // Start running animation
     public void Run()
     {
         SetRun(true);
     }
 
+    // Start idle animation
     public void Idle()
     {
         SetRun(false);
     }
 
+    // Play shoot animation once
     public void Shoot()
     {
         playerAnimator.SetTrigger("Shoot");
     }
 
+    // Play die animation
     public void Die()
     {
         playerAnimator.SetBool("IsDead", true);
     }
 
-    void SetRun(bool isRunningForward)
+    private void SetRun(bool isRunning)
     {
-        playerAnimator.SetBool("IsRunning", isRunningForward);
+        playerAnimator.SetBool("IsRunning", isRunning);
     }
 }

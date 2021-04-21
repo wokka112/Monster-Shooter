@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FriendlyProjectileLogic : MonoBehaviour
 {
@@ -23,17 +21,21 @@ public class FriendlyProjectileLogic : MonoBehaviour
 
         if (other.CompareTag("Enemy"))
         {
+            EnemyController enemyController = other.GetComponent<EnemyController>();
+
             // If enemy's already dieing go through
-            if (other.GetComponent<EnemyController>().IsDieing())
+            if (enemyController.IsDieing())
             {
                 return;
             }
 
             // Otherwise deal damage
-            other.GetComponent<HealthSystem>().Damage(projectileDmg);
+            enemyController.Damage(projectileDmg);
         }
 
+        // Push the object slightly based on impact force
         other.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.Impulse);
+        // Play bullet hitting audio
         audioManager.Play("BulletHit");
         Destroy(gameObject);
     }

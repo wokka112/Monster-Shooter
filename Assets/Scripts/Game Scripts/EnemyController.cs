@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
@@ -8,10 +6,11 @@ public class EnemyController : MonoBehaviour
     public float speed;
     public int scoreValue;
     public float rangedAttackDelay = 0.5f;
+    public int strength = 1;
 
     public AudioSource meleeAttackAudio;
     public AudioSource rangedAttackAudio;
-    public AudioSource hitAudio;
+    public AudioSource getHitAudio;
     public AudioSource movementAudio;
     public AudioSource deathAudio;
 
@@ -20,22 +19,34 @@ public class EnemyController : MonoBehaviour
     private GameManager gameManager;
     private EnemyAnim enemyAnimScript;
     private Rigidbody enemyRb;
+    private RigidbodyConstraints initialRbConstraints;
+    private HealthSystem enemyHealth;
     private Transform playerTransform;
     private Vector3 newVelocity;
+    private PlayerController playerController;
 
-    //TODO Replace with allowTracking and then trigger from enemyHealth?
     private bool isDieing = false;
     private bool allowMovement = true;
+    private bool touchingPlayer = false;
 
-    //TODO remove the anim calls from here and call animator from different classes?
+    public bool IsDieing()
+    {
+        return isDieing;
+    }
+
+    public bool IsTouchingPlayer() { return touchingPlayer; }
+    public void SetTouchingPlayer(bool touchingPlayer) { this.touchingPlayer = touchingPlayer; }
 
     // Start is called before the first frame update
     void Start()
     {
         enemyAnimScript = GetComponent<EnemyAnim>();
         enemyRb = GetComponent<Rigidbody>();
+        initialRbConstraints = enemyRb.constraints;
+        enemyHealth = GetComponent<HealthSystem>();
         gameManager = FindObjectOfType<GameManager>();
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         StartMovement();
     }
 
@@ -72,6 +83,14 @@ public class EnemyController : MonoBehaviour
         allowMovement = false;
     }
 
+    public void DamagePlayer()
+    {
+        if (touchingPlayer)
+        {
+            playerController.Damage(strength);
+        }
+    }
+
     public void MeleeAttack()
     {
         if (!isDieing)
@@ -87,15 +106,27 @@ public class EnemyController : MonoBehaviour
         {
             enemyAnimScript.RangedAttack();
             rangedAttackAudio.Play();
-            //TODO move into ranged ai script
-            // Spawn ranged projectile and shoot forward
             Invoke("SpawnRangedProjectile", rangedAttackDelay);
         }
     }
 
-    public void GetHit()
+    public void Damage(int damage)
     {
-        hitAudio.Play();
+        // Deal damage to enemy health
+        enemyHealth.Damage(damage);
+
+        // If enemy's health is 0 or less
+        if (enemyHealth.getHealth() <= 0)
+        {
+            // Kill enemy
+            Die();
+        } 
+        // Otherwise
+        else
+        {
+            // Play getting hit audio
+            getHitAudio.Play();
+        }        
     }
 
     public void Die()
@@ -106,11 +137,6 @@ public class EnemyController : MonoBehaviour
         deathAudio.Play();
         gameManager.IncreaseScore(scoreValue);
         Invoke("DestroyEnemy", destroyDelay);
-    }
-
-    public bool IsDieing()
-    {
-        return isDieing;
     }
 
     public void Victory()
@@ -131,5 +157,25 @@ public class EnemyController : MonoBehaviour
     void SpawnRangedProjectile()
     {
         Instantiate(enemyProjectilePrefab, transform.position, transform.rotation);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // If the enemy collides with a player
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Stop the player pushing the enemy
+            enemyRb.constraints = RigidbodyConstraints.FreezeAll;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        // IF enemy is no longer colliding with player
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Reset constraints so enemy can move again
+            enemyRb.constraints = initialRbConstraints;
+        }
     }
 }

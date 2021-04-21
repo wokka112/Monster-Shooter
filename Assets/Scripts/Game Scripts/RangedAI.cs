@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RangedAI : MonoBehaviour
 {
@@ -21,7 +19,7 @@ public class RangedAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // If the player is within attack range, attack them
+        // If the player is within attack range
         if (Vector3.Distance(transform.position, playerTransform.position) < attackRange)
         {
             // Stop moving
@@ -50,9 +48,11 @@ public class RangedAI : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        enemyControllerScript.SetTouchingPlayer(true);
+
+        // If the player comes into melee range attack them
         if (collision.gameObject.CompareTag("Player"))
         {
-            enemyControllerScript.StopMovement();
             enemyControllerScript.MeleeAttack();
             timeSinceLastAttack = 0;
         }
@@ -60,14 +60,6 @@ public class RangedAI : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        float movementDelay = timeSinceLastAttack + attackRate;
-
-        if (movementDelay < 0)
-        {
-            movementDelay = 0;
-        }
-
-        // Start moving once it's been attackRate seconds since the last attack
-        Invoke("StartMovement", movementDelay);
+        enemyControllerScript.SetTouchingPlayer(false);
     }
 }

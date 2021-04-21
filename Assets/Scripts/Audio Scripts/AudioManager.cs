@@ -20,9 +20,11 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
+        // Set the sound attributes for each sound in the manager
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
+            s.source.outputAudioMixerGroup = s.group;
             s.source.clip = s.clip;
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
@@ -34,8 +36,10 @@ public class AudioManager : MonoBehaviour
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
 
+        // If sound does not exist
         if (s == null)
         {
+            // Log a warning
             Debug.LogWarning("Sound: " + name + " was not found!");
             return;
         }
@@ -47,8 +51,10 @@ public class AudioManager : MonoBehaviour
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
 
+        // If sound does not exist
         if (s == null)
         {
+            // Log a warning
             Debug.LogWarning("Sound: " + name + " was not found!");
             return;
         }

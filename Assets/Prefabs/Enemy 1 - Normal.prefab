@@ -156,9 +156,10 @@ MonoBehaviour:
   speed: 300
   scoreValue: 5
   rangedAttackDelay: 0.5
+  strength: 1
   meleeAttackAudio: {fileID: 82691300790770888}
   rangedAttackAudio: {fileID: 0}
-  hitAudio: {fileID: 0}
+  getHitAudio: {fileID: 0}
   movementAudio: {fileID: 0}
   deathAudio: {fileID: 82798106581405664}
   enemyProjectilePrefab: {fileID: 0}
@@ -197,10 +198,11 @@ AudioSource:
   m_GameObject: {fileID: 8519262671703972396}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: d927d2c0e6e7845439561ff9d0545d16,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 8573acc1450406946ab89a5af90594d3, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.4
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -293,10 +295,11 @@ AudioSource:
   m_GameObject: {fileID: 8519262671703972396}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: d927d2c0e6e7845439561ff9d0545d16,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 18b8e46b2c26ff84ea56370b4ea89f2c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.4
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0

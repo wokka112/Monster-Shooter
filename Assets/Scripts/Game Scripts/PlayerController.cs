@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,14 +10,14 @@ public class PlayerController : MonoBehaviour
     public float verticalInput;
     public float horizontalInput;
     public float zBound = 9;
-    public float xBound = 23;
+    public float xBound = 17;
 
     // How high off the ground the player is (y-axis)
     private float playerHeight;
 
     //TODO remove after done testing
     //For testing
-    private bool pausePlayer = false;
+    private bool pauseGame = false;
 
     private bool hasLightningShield = false;
 
@@ -28,6 +26,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     public GameObject lightningShieldIndicator;
     private AudioManager audioManager;
+    private HealthSystem playerHealth;
+    public GameObject bulletSpawnPoint;
+
+    public CrosshairAnimation crosshairAnimation;
 
     // Start is called before the first frame update
     void Start()
@@ -36,15 +38,15 @@ public class PlayerController : MonoBehaviour
         cam = Camera.main;
         playerHeight = transform.position.y;
         playerAnim = GetComponentInChildren<PlayerAnim>();
+        playerHealth = GetComponent<HealthSystem>();
         audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void FixedUpdate()
     {
-        // Move character using physics
-        // Remove current velocity from new velocity to cancel out accumulation of force/velocity
         if (!GameManager.gameOver)
         {
+            // Remove current velocity from new velocity to cancel out accumulation of force/velocity
             playerRb.AddForce(newVelocity - playerRb.velocity, ForceMode.VelocityChange);
         }
     }
@@ -52,49 +54,48 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.gameOver && GameManager.gameIsActive && !PauseMenu.gameIsPaused)
+        if (!GameManager.gameOver && !PauseMenu.gameIsPaused)
         {
-            SetInputs();
+            GetInputs();
             SetMovementAnimation();
             CalculateNewVelocity();
 
-            // Rotation follows cursor
-            // pausePlayer clause for testing
-            if (!pausePlayer)
+            // pauseGame if statement for testing
+            if (!pauseGame)
             {
                 FollowCursor();
             }
 
-            // Click fire at cursor
+            // Rotate to follow cursor
+            // FollowCursor();
+
+            // Click to shoot towards cursor
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 ShootProjectile();
             }
 
-            //for testing
+            //for testing and pictures
+            // Press space to pause the game
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                pausePlayer = !pausePlayer;
+                pauseGame = !pauseGame;
+                
+                if (pauseGame)
+                {
+                    Time.timeScale = 0f;
+                } else
+                {
+                    Time.timeScale = 1f;
+                }
             }
-
-            // If player collides with enemy in attack mode, die
         }
 
+        // Keep lightning shield indicator positioned under player
         lightningShieldIndicator.transform.position = gameObject.transform.position + new Vector3(0, -playerHeight, 0);
     }
 
-    public void HitByEnemyProjectile()
-    {
-        if (hasLightningShield)
-        {
-            DeactivateLightningShield();
-        } else
-        {
-            Lose();
-        }
-    }
-
-    private void SetInputs()
+    private void GetInputs()
     {
         verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
@@ -116,19 +117,23 @@ public class PlayerController : MonoBehaviour
     
     private void SetMovementAnimation()
     {
+        // If the player is moving at all
         if (verticalInput > 0 || verticalInput < 0
             || horizontalInput > 0 || horizontalInput < 0)
         {
+            // Set the animation to run
             playerAnim.Run();
-        } else
+        } // Otherwise 
+        else
         {
+            // Set the animation to idle
             playerAnim.Idle();
         }
     }
 
     private void CalculateNewVelocity()
     {
-        // Set new velocity for character to move
+        // Calculate new velocity for character to move
         newVelocity = Vector3.zero;
         newVelocity += cam.transform.right * horizontalInput * Time.deltaTime * speed;
         newVelocity += cam.transform.up * verticalInput * Time.deltaTime * speed;
@@ -136,39 +141,88 @@ public class PlayerController : MonoBehaviour
 
     private void FollowCursor()
     {
-        Vector3 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
-        // Setting playerHeight keeps the player looking straight ahead.
-        mousePosition = new Vector3(mousePosition.x, playerHeight, mousePosition.z);
-        transform.LookAt(mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Plane plane = new Plane(transform.up, transform.position);
+        float distance = Vector3.Distance(Camera.main.transform.position, transform.position);
+        plane.Raycast(ray, out distance);
+
+        transform.LookAt(ray.GetPoint(distance));
     }
 
     private void ShootProjectile()
     {
         playerAnim.Shoot();
-        Instantiate(projectilePrefab, transform.position, transform.rotation);
+        Instantiate(projectilePrefab, bulletSpawnPoint.transform.position, transform.rotation);
+    }
+
+    public void HitByEnemyProjectile(int damage)
+    {
+        // If you have an active lightning shield
+        if (hasLightningShield)
+        {
+            // Lose the lightning shield but live
+            DeactivateLightningShield();
+        } // Otherwise 
+        else
+        {
+            // Take damage
+            Damage(damage);
+        }
+    }
+    public void Damage(int damage)
+    {
+        if (!GameManager.gameOver)
+        {
+            // Take damage
+            playerHealth.Damage(damage);
+
+            // If you're at 0 or less health
+            if (playerHealth.getHealth() <= 0)
+            {
+                // Die and lose
+                Lose();
+            } // Otherwise
+            else
+            {
+                // Play getting hit sound
+            }
+        }
     }
 
     private void DeactivateLightningShield()
     {
+        // Turn off lightning shield
         hasLightningShield = false;
+        // Hide indicator
         lightningShieldIndicator.SetActive(false);
+        // Stop active lightning shield sound looping
         audioManager.Stop("LightningShieldActive");
     }
 
+
     private void Lose()
     {
+        // Set the game to over
         FindObjectOfType<GameManager>().GameOver();
+        // Kill player
         Die();
+    }
+
+    private void Die()
+    {
+        audioManager.Play("PlayerDeath");
+        playerAnim.Die();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Lightning Shield"))
         {
-            // Play pickup sound
             audioManager.Play("LightningShieldPickup");
             Destroy(other.gameObject);
+            // Turn on lightning shield
             hasLightningShield = true;
+            // Display lightning shield indicator
             lightningShieldIndicator.SetActive(true);
             audioManager.Play("LightningShieldActive");
         }
@@ -178,23 +232,14 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            if (hasLightningShield)
+            bool enemyIsDieing = collision.gameObject.GetComponent<EnemyController>().IsDieing();
+            if (hasLightningShield && !enemyIsDieing)
             {
                 // Play lightning sound
-                collision.gameObject.GetComponent<HealthSystem>().Damage(999);
+                collision.gameObject.GetComponent<EnemyController>().Damage(999);
                 DeactivateLightningShield();
                 audioManager.Play("LightningShieldHit");
-            } else
-            {
-                Lose();
             }
         }
-    }
-
-    private void Die()
-    {
-        audioManager.Play("PlayerDeath");
-        //Play death anim
-        playerAnim.Die();
     }
 }

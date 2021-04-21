@@ -8,6 +8,8 @@ public class Sound
 
     public AudioClip clip;
 
+    public AudioMixerGroup group;
+
     [Range(0f, 1f)]
     public float volume;
     [Range(0.1f, 3f)]
@@ -17,5 +19,5 @@ public class Sound
 
     // Populated automatically in AudioManager.cs.
     [HideInInspector]
-    public AudioSource source;
+    public AudioSource source;   
 }

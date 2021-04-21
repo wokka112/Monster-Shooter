@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyProjectileLogic : MonoBehaviour
 {
+    public int damage = 1;
+
     public float impactForce = 5f;
 
     private AudioManager audioManager;
@@ -15,18 +15,19 @@ public class EnemyProjectileLogic : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // Go through enemies
         if (other.CompareTag("Enemy"))
         {
             return;
         }
 
+        // Damage player
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Hit " + other.gameObject.name);
-            other.GetComponentInParent<PlayerController>().HitByEnemyProjectile();
+            other.GetComponentInParent<PlayerController>().HitByEnemyProjectile(damage);
         }
 
-        // Play particle explosion
+        // Play hit sound for enemy projectile
         audioManager.Play("EnemyProjectileHit");
         Destroy(gameObject);
     }
